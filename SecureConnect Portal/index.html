@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            background-color: rgb(145, 145, 225);
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #signup-form {
+            text-align: center;
+            position: relative;
+        }
+
+        #result,
+        #success-message,
+        #signup-message {
+            margin-top: 20px;
+            color: rgb(235, 222, 222);
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        #success-message {
+            color: rgb(228, 236, 228);
+            font-size: large;
+        }
+
+        #myForm {
+            display: block;
+            z-index: 0;
+        }
+
+        #result,
+        #success-message,
+        #signup-message {
+            display: none;
+        }
+
+        #signup-message {
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="signup-form">
+        <h2 id="signup-message">Sign Up</h2>
+        <form id="myForm" action="http://localhost/new2/get.php" method="get">
+            <label for="name"></label>
+            <input type="text" id="name" name="name"  placeholder="username">
+            <br>
+            <label for="password"></label>
+            <input type="password" id="password" name="password" placeholder="password">
+            <br>
+            <button type="submit"  onclick="validateForm()" >Submit</button>
+        </form>
+        <div style="display: none;" id="error_box">
+            <button type="button" onclick="" id="close">close</button>
+            <h2>Please enter data correctly</h2>
+        </div>
+
+
+        <div style="display: none;" id="success_message">
+            <button type="button">close</button>
+            <h2>sucessfull</h2>
+        </div>
+
+    </div>
+
+    <script>
+
+
+
+        function validateForm() {
+            const close = document.getElementById('close');
+            console.log(close)
+            var name = document.getElementById('name').value;
+            var password = document.getElementById('password').value;
+            var resultElement = document.getElementById('error_box');
+            var successMessage = document.getElementById('success_message');
+            var signupMessage = document.getElementById('signup-message');
+            var formElement = document.getElementById('myForm');
+            // console.log(formElement);
+           
+            if (name === '' || password === '') {
+                resultElement.style.display = 'block';
+                formElement.style.display = 'none';
+                //   signupMessage.style.display = 'none';
+            } else {
+                resultElement.textContent = '';
+                successMessage.textContent = 'Successfully signed up!';
+                formElement.style.display = 'none';
+                signupMessage.style.display = 'none';
+            }
+            resultElement.style.display = name === '' || password === '' ? 'block' : 'none';
+            successMessage.style.display = name !== '' && password !== '' ? 'block' : 'none';
+
+   close.addEventListener("click", function () {
+    resultElement.style.display = "none";     
+    formElement.style.display = 'block';
+
+ 
+            })
+         
+
+        }
+
+       
+
+    </script>
+
+</body>
+
+</html>
